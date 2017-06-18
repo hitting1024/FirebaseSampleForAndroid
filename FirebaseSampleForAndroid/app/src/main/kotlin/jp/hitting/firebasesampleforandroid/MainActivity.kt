@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
 
     private var mDatabase: DatabaseReference? = null
 
-    private var mUserList = ArrayList<DataSnapshot>()
+    private val mUserList = ArrayList<DataSnapshot>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
