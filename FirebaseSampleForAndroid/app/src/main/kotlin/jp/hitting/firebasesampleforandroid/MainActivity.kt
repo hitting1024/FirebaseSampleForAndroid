@@ -2,6 +2,7 @@ package jp.hitting.firebasesampleforandroid
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.EditText
 import android.widget.ListView
 import com.google.firebase.database.*
 
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         this.initLayout()
+        this.initAction()
         this.initFirebase()
     }
 
@@ -26,6 +28,19 @@ class MainActivity : AppCompatActivity() {
         val listView = this.findViewById(R.id.listView) as ListView
         this.mAdapter = FirebaseAdapter(this, android.R.layout.simple_list_item_1, this.mUserList)
         listView.adapter = this.mAdapter
+    }
+
+    private fun initAction() {
+        val nameText = this.findViewById(R.id.nameText) as EditText
+        val addressText = this.findViewById(R.id.addressText) as EditText
+
+        this.findViewById(R.id.saveButton).setOnClickListener { v ->
+            if (nameText.text.isEmpty() || addressText.text.isEmpty()) {
+                return@setOnClickListener
+            }
+            val user = User(nameText.text.toString(), addressText.text.toString())
+            this.mDatabase?.child("users")?.push()?.setValue(user)
+        }
     }
 
     private fun initFirebase() {
