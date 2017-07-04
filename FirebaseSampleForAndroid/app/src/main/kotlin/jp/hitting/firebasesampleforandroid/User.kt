@@ -5,4 +5,7 @@ import com.google.firebase.database.IgnoreExtraProperties
 @IgnoreExtraProperties
 class User(val name: String, val address: String) {
 
+    // use by firebase
+    constructor() : this("", "")
+
 }
