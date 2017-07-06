@@ -6,12 +6,11 @@ import android.widget.EditText
 import android.widget.ListView
 import com.google.firebase.database.*
 
-
 class MainActivity : AppCompatActivity() {
 
     private var mDatabase: DatabaseReference? = null
 
-    private val mUserList = ArrayList<DataSnapshot>()
+    private val mUserList = ArrayList<User>()
 
     private var mAdapter: FirebaseAdapter? = null
 
@@ -52,7 +51,8 @@ class MainActivity : AppCompatActivity() {
                 if (dataSnapshot == null) {
                     return
                 }
-                this@MainActivity.mUserList.add(dataSnapshot)
+                val user = dataSnapshot.getValue(User::class.java)
+                this@MainActivity.mUserList.add(user)
                 this@MainActivity.mAdapter?.notifyDataSetChanged()
             }
 
