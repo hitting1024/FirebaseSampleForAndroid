@@ -2,6 +2,7 @@ package jp.hitting.firebasesampleforandroid
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 import android.widget.EditText
 import android.widget.ListView
 import com.google.firebase.database.*
@@ -74,4 +75,10 @@ class MainActivity : AppCompatActivity() {
 
         })
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        this.menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
 }
