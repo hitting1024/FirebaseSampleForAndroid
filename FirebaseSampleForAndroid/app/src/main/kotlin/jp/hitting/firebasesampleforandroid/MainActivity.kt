@@ -1,8 +1,10 @@
 package jp.hitting.firebasesampleforandroid
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.EditText
 import android.widget.ListView
 import com.google.firebase.database.*
@@ -79,6 +81,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         this.menuInflater.inflate(R.menu.menu, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.storageItem -> {
+                this.startActivity(Intent(this, StorageActivity::class.java))
+                return true
+            }
+        }
+        return false
     }
 
 }
