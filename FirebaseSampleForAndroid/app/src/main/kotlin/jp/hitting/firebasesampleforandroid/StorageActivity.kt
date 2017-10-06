@@ -1,5 +1,7 @@
 package jp.hitting.firebasesampleforandroid
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
@@ -29,6 +31,14 @@ class StorageActivity : AppCompatActivity() {
 
     private fun initFirebase() {
         this.storageRef = FirebaseStorage.getInstance().reference
+    }
+
+    private fun loadImage(name: String, completion: (Bitmap) -> Unit) {
+        this.storageRef?.child("${name}.png")?.getBytes(1 * 1024 * 1024 /* 1MB */)
+                ?.addOnSuccessListener {
+                    val image = BitmapFactory.decodeByteArray(it, 0, it.size)
+                    completion(image)
+                }
     }
 
 }
