@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import java.io.ByteArrayOutputStream
 
 
 class StorageActivity : AppCompatActivity() {
@@ -53,6 +54,18 @@ class StorageActivity : AppCompatActivity() {
                     val image = BitmapFactory.decodeByteArray(it, 0, it.size)
                     completion(image)
                 }
+    }
+
+    private fun uploadImage(name: String, completion: () -> Unit) {
+        val resourceId = this.resources.getIdentifier(name, "drawable", this.packageName)
+        val image = BitmapFactory.decodeResource(this.resources, resourceId)
+        ByteArrayOutputStream().use {
+            image.compress(Bitmap.CompressFormat.PNG, 100, it)
+            this.storageRef?.child("${name}.png")?.putBytes(it.toByteArray())
+                    ?.addOnSuccessListener {
+                        completion()
+                    }
+        }
     }
 
 }
