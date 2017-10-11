@@ -22,8 +22,8 @@ class StorageActivity : AppCompatActivity() {
 
         this.initLayout()
         this.initFirebase()
-        this.loadImage1()
-        this.loadImage2()
+        this.loadImageA()
+        this.loadImageB()
     }
 
     private fun initLayout() {
@@ -36,14 +36,14 @@ class StorageActivity : AppCompatActivity() {
         this.storageRef = FirebaseStorage.getInstance().reference
     }
 
-    private fun loadImage1() {
-        this.loadImage("1", {
+    private fun loadImageA() {
+        this.loadImage("a", {
             this.imageView1?.setImageBitmap(it)
         })
     }
 
-    private fun loadImage2() {
-        this.loadImage("2", {
+    private fun loadImageB() {
+        this.loadImage("b", {
             this.imageView2?.setImageBitmap(it)
         })
     }
