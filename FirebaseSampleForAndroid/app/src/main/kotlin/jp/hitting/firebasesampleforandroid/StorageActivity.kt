@@ -21,6 +21,7 @@ class StorageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         this.initLayout()
+        this.addAction()
         this.initFirebase()
         this.loadImageA()
         this.loadImageB()
@@ -30,6 +31,19 @@ class StorageActivity : AppCompatActivity() {
         this.setContentView(R.layout.activity_storage)
         this.imageView1 = this.findViewById(R.id.image1) as ImageView
         this.imageView2 = this.findViewById(R.id.image2) as ImageView
+    }
+
+    private fun addAction() {
+        this.findViewById(R.id.uploadImage1).setOnClickListener {
+            this.uploadImage("a", {
+                this.loadImageA()
+            })
+        }
+        this.findViewById(R.id.uploadImage2).setOnClickListener {
+            this.uploadImage("b", {
+                this.loadImageB()
+            })
+        }
     }
 
     private fun initFirebase() {
