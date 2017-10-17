@@ -82,4 +82,10 @@ class StorageActivity : AppCompatActivity() {
         }
     }
 
+    private fun removeImage(name: String, completion: () -> Unit) {
+        this.storageRef?.child("${name}.png")?.delete()
+                ?.addOnSuccessListener {
+                    completion()
+                }
+    }
 }
