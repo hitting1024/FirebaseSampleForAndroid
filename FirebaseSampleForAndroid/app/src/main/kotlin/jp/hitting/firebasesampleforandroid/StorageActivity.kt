@@ -44,6 +44,16 @@ class StorageActivity : AppCompatActivity() {
                 this.loadImageB()
             })
         }
+        this.findViewById(R.id.removeImage1).setOnClickListener {
+            this.removeImage("a", {
+                this.imageView1?.setImageBitmap(null)
+            })
+        }
+        this.findViewById(R.id.removeImage2).setOnClickListener {
+            this.removeImage("b", {
+                this.imageView2?.setImageBitmap(null)
+            })
+        }
     }
 
     private fun initFirebase() {
@@ -81,11 +91,12 @@ class StorageActivity : AppCompatActivity() {
                     }
         }
     }
-
+    
     private fun removeImage(name: String, completion: () -> Unit) {
         this.storageRef?.child("${name}.png")?.delete()
                 ?.addOnSuccessListener {
                     completion()
                 }
     }
+
 }
